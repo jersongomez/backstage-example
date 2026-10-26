@@ -1,4 +1,4 @@
-import { render, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import App from './App';
 
 describe('App', () => {
@@ -24,5 +24,10 @@ describe('App', () => {
     await waitFor(() => {
       expect(rendered.baseElement).toBeInTheDocument();
     });
+
+    expect(await screen.findByText('Sign in using GitHub')).toBeInTheDocument();
+    expect(
+      screen.queryByText('Enter as a Guest User.'),
+    ).not.toBeInTheDocument();
   });
 });
